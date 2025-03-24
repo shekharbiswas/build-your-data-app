@@ -76,6 +76,12 @@
             width: 400px;
             z-index: 1000;
         }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            display: none;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -89,12 +95,11 @@
     </div>
 
     <div class="container">
-        <h1>Build Your  <i>1st Data App</i>  in Python</h1>
+        <h1>Build Your <i>1st Data App</i> in Python</h1>
         <p>A 4-week hands-on course to help you build & launch your first data app!</p>
         
         <h2>Who is this course for?</h2>
         <ul>
-            <li>✅ Beginners who want to learn python in a fun way.</li>
             <li>✅ Beginners who want to break into data science.</li>
             <li>✅ Developers looking to build real-world projects.</li>
             <li>✅ Anyone interested in learning how to create interactive data apps.</li>
@@ -104,7 +109,7 @@
         <ul>
             <li>📊 Learn Python for Data Science & App Development.</li>
             <li>📈 Master data processing, visualization, and APIs.</li>
-            <li>🚀 Build a fully functional interactive data app.</li>
+            <li>🚀 Build a fully functional **interactive data app**.</li>
             <li>🌍 Deploy your app online for the world to see.</li>
         </ul>
 
@@ -114,41 +119,51 @@
 
     <!-- Popup Window for Qualification Questions -->
     <div id="popup" class="popup" style="display: none;">
-        <h2>Check if you <i>qualify</i></h2>
+        <h2>Check If You Qualify</h2>
         <p>Answer these 2 simple questions.</p>
 
-        <label class="question-label"> What <i>programming language</i> is used in this course?</label>
-        <input type="text" id="q1" placeholder="Enter your answer" style="width: 90%; padding: 8px;"><br><br>
+        <label class="question-label">1️⃣ What <i>programming language</i> is used in this course?</label>
+        <input type="text" id="q1" placeholder="Enter your answer" style="width: 90%; padding: 10px;"><br><br>
 
-        <label class="question-label"> What will you <i>build</i> in this course?</label>
-        <input type="text" id="q2" placeholder="Enter your answer" style="width: 90%; padding: 8px;"><br><br>
+        <label class="question-label">2️⃣ What will you build in this course?</label>
+        <input type="text" id="q2" placeholder="Enter your answer" style="width: 90%; padding: 10px;"><br><br>
 
+        <p id="messageBox" class="error-message"></p>
+        <p id="discountMessage" style="display: none; font-weight: bold;"></p>
         <button class="btn" onclick="checkQualification()">Submit</button>
+        <div id="paypalButton" style="display: none; margin-top: 20px;"></div>
     </div>
 
     <script>
         function openPopup() {
             document.getElementById("overlay").style.display = "block";
             document.getElementById("popup").style.display = "block";
-        }
-
-        function closePopup() {
-            document.getElementById("overlay").style.display = "none";
-            document.getElementById("popup").style.display = "none";
+            document.getElementById("messageBox").style.display = "none";
+            document.getElementById("discountMessage").style.display = "none";
+            document.getElementById("paypalButton").style.display = "none";
         }
 
         function checkQualification() {
-            var answer1 = document.getElementById("q1").value.toLowerCase();
-            var answer2 = document.getElementById("q2").value.toLowerCase();
-            closePopup();
+            var answer1 = document.getElementById("q1").value.trim().toLowerCase();
+            var answer2 = document.getElementById("q2").value.trim().toLowerCase();
+            var messageBox = document.getElementById("messageBox");
+            var discountMessage = document.getElementById("discountMessage");
+            var paypalButton = document.getElementById("paypalButton");
 
-            if (answer1.includes("python") && (answer2.includes("data app") || answer2.includes("app"))) {
-                window.location.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YOUR_PAYPAL_BUTTON_ID";
+            const isQualified = answer1 === "python" && (answer2.includes("data app") || answer2.includes("app"));
+
+            if (isQualified) {
+                let discount = Math.floor(Math.random() * (30 - 20 + 1)) + 20;
+                let finalPrice = Math.round(49 * (1 - discount / 100));
+                discountMessage.innerHTML = `🎉 You Qualify! You get a ${discount}% discount!<br>Final Price: $${finalPrice}`;
+                discountMessage.style.display = "block";
+                paypalButton.innerHTML = `<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YOUR_PAYPAL_BUTTON_ID" class="btn">Start Your Course</a>`;
+                paypalButton.style.display = "block";
             } else {
-                alert("❌ Please try again ");
+                messageBox.style.display = "block";
+                messageBox.innerHTML = "❌ Incorrect answers. Please try again.";
             }
         }
     </script>
-
 </body>
 </html>
