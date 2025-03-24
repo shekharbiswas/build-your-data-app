@@ -34,7 +34,7 @@
         }
         h1, h2, h3 { font-family: 'Bitter', serif; color: #2c3e50; }
         p, input { font-family: 'Roboto', sans-serif; font-weight: 300; font-size: 18px; color: #555; }
-        .question-label { font-size: 20px; font-weight: 400; display: block; margin-bottom: 5px; }
+        .question-label { font-size: 22px; font-weight: 400; display: block; margin-bottom: 10px; }
         ul { text-align: left; list-style: none; padding: 0; }
         li { font-size: 18px; margin: 10px 0; }
         .btn {
@@ -50,9 +50,38 @@
             cursor: pointer;
         }
         .btn:hover { background-color: #2980b9; }
+        
+        /* Overlay effect when popup is open */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+        
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Overlay Background -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- Header Image -->
     <div class="header-container">
@@ -83,55 +112,40 @@
     </div>
 
     <!-- Popup Window for Qualification Questions -->
-    <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); text-align: center; width: 300px;">
+    <div id="popup" class="popup" style="display: none;">
         <h2>Check If You Qualify</h2>
         <p>Answer these 2 simple questions.</p>
 
         <label class="question-label">1️⃣ What programming language is used in this course?</label>
-        <input type="text" id="q1" placeholder="Enter your answer" style="width: 90%; padding: 10px; font-family: 'Roboto', sans-serif;"><br><br>
+        <input type="text" id="q1" placeholder="Enter your answer" style="width: 90%; padding: 10px;"><br><br>
 
         <label class="question-label">2️⃣ What will you build in this course?</label>
-        <input type="text" id="q2" placeholder="Enter your answer" style="width: 90%; padding: 10px; font-family: 'Roboto', sans-serif;"><br><br>
+        <input type="text" id="q2" placeholder="Enter your answer" style="width: 90%; padding: 10px;"><br><br>
 
         <button class="btn" onclick="checkQualification()">Submit</button>
     </div>
 
-    <!-- Success or Failure Message Popup -->
-    <div id="popupMessage" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); text-align: center; width: 300px;">
-        <h3 id="messageText"></h3>
-        <div id="enrollSection" class="hidden">
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_s-xclick">
-                <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID">
-                <input type="submit" value="Begin Your Course" class="btn">
-            </form>
-        </div>
-        <button class="btn" onclick="closePopup()">Close</button>
-    </div>
-
     <script>
         function openPopup() {
+            document.getElementById("overlay").style.display = "block";
             document.getElementById("popup").style.display = "block";
         }
 
         function closePopup() {
+            document.getElementById("overlay").style.display = "none";
             document.getElementById("popup").style.display = "none";
-            document.getElementById("popupMessage").style.display = "none";
         }
 
         function checkQualification() {
             var answer1 = document.getElementById("q1").value.toLowerCase();
             var answer2 = document.getElementById("q2").value.toLowerCase();
-            document.getElementById("popup").style.display = "none";
+            closePopup();
 
             if (answer1.includes("python") && (answer2.includes("data app") || answer2.includes("app"))) {
-                document.getElementById("messageText").innerText = "🎉 You Qualify! Begin Your Course";
-                document.getElementById("enrollSection").style.display = "block";
+                alert("🎉 You Qualify! Begin Your Course");
             } else {
-                document.getElementById("messageText").innerText = "❌ Please Come Back Later";
-                document.getElementById("enrollSection").style.display = "none";
+                alert("❌ Please Come Back Later");
             }
-            document.getElementById("popupMessage").style.display = "block";
         }
     </script>
 
