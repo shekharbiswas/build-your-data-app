@@ -8,20 +8,23 @@
         body { 
             font-family: Arial, sans-serif; 
             text-align: center; 
-            padding: 20px; 
             background-color: #f4f4f4;
+            padding: 20px;
         }
-        h1 { color: #2c3e50; font-size: 36px; }
-        p { font-size: 18px; color: #333; }
-        ul { list-style: none; padding: 0; }
-        li { font-size: 18px; margin: 10px 0; }
-        .container { 
-            background: white; 
-            padding: 30px; 
-            max-width: 700px; 
-            margin: auto; 
+        .container {
+            background: white;
+            padding: 30px;
+            max-width: 700px;
+            margin: auto;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 { color: #2c3e50; font-size: 32px; }
+        p { font-size: 18px; color: #555; }
+        .hero-image {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 10px;
         }
         .btn {
             background-color: #3498db;
@@ -32,48 +35,67 @@
             border-radius: 5px;
             display: inline-block;
             margin-top: 10px;
+            border: none;
+            cursor: pointer;
         }
         .btn:hover { background-color: #2980b9; }
-        .header-image {
-            width: 100%;
-            max-width: 700px;
+        .hidden { display: none; }
+        .question-box {
+            background: #e8f4fa;
+            padding: 20px;
             border-radius: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Banner Image -->
-    <img src="assets/images/header.png" alt="Build Your 1st Data App" class="header-image">
+    <!-- Hero Section -->
+    <img src="assets/images/header.png" alt="Build Your 1st Data App" class="hero-image">
 
     <div class="container">
         <h1>Build Your 1st Data App in Python</h1>
         <p>A 4-week hands-on course to help you build & launch your first data app!</p>
         
-        <h2>What You'll Learn:</h2>
-        <ul>
-            <li>✅ Python & Data Basics</li>
-            <li>✅ Data Processing & Visualization</li>
-            <li>✅ Building an Interactive Data App</li>
-            <li>✅ Deploying Your App Online</li>
-        </ul>
+        <!-- "Check If You Qualify" Section -->
+        <div class="question-box">
+            <h2>Check If You Qualify</h2>
+            <p>Answer these 2 simple questions to see if this course is right for you.</p>
 
-        <h2>Enroll Now</h2>
-        <p><strong>Price: $49</strong></p>
-        
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID">
-            <input type="submit" value="Buy Now" class="btn">
-        </form>
+            <label>1️⃣ What programming language is used in this course?</label><br>
+            <input type="text" id="q1" placeholder="Enter your answer"><br><br>
 
-        <h3>How It Works</h3>
-        <p>1️⃣ Click "Buy Now" to purchase via PayPal.</p>
-        <p>2️⃣ You'll receive an email with access to our private GitHub repo.</p>
-        <p>3️⃣ Start learning & building your data app!</p>
+            <label>2️⃣ What will you build in this course?</label><br>
+            <input type="text" id="q2" placeholder="Enter your answer"><br><br>
 
-        <p>Have questions? <a href="mailto:your-email@example.com">Contact us</a></p>
+            <button class="btn" onclick="checkQualification()">Check</button>
+        </div>
+
+        <!-- "You Qualify! Get Started" Button (Hidden Initially) -->
+        <div id="qualifiedMessage" class="hidden">
+            <h3>🎉 You Qualify! Get Started Now!</h3>
+            <p><strong>Price: $49</strong></p>
+
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID">
+                <input type="submit" value="Get Started" class="btn">
+            </form>
+        </div>
     </div>
+
+    <script>
+        function checkQualification() {
+            var answer1 = document.getElementById("q1").value.toLowerCase();
+            var answer2 = document.getElementById("q2").value.toLowerCase();
+            
+            if (answer1.includes("python") && (answer2.includes("data app") || answer2.includes("app"))) {
+                document.getElementById("qualifiedMessage").style.display = "block";
+            } else {
+                alert("Oops! Try again.");
+            }
+        }
+    </script>
 
 </body>
 </html>
