@@ -65,7 +65,7 @@
         
         .popup {
             position: fixed;
-            top: 10%; /* Move popup closer to the top of the page */
+            top: 10%;
             left: 50%;
             transform: translate(-50%, 0);
             background: white;
@@ -76,7 +76,6 @@
             width: 90%;
             max-width: 400px;
             z-index: 1000;
-            position: relative;
         }
 
         .close-btn {
@@ -105,7 +104,7 @@
 <body>
 
     <!-- Overlay Background -->
-    <div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
 
     <!-- Header Image -->
     <div class="header-container">
@@ -128,7 +127,7 @@
         <ul>
             <li>📊 Learn Python Basics and <i>build your 1st App</i>.</li>
             <li>📈 Master data processing, visualization, and APIs.</li>
-            <li>🚀 Build a fully functional **interactive data app**.</li>
+            <li>🚀 Build a fully functional <b>interactive data app</b>.</li>
             <li>🌍 Deploy your app online for the world to see.</li>
         </ul>
 
@@ -138,6 +137,7 @@
 
     <!-- Popup Window for Qualification Questions -->
     <div id="popup" class="popup" style="display: none;">
+        <button class="close-btn" onclick="closePopup()">✖</button>
         <h2>Check if you qualify</h2>
         <p>Answer below simple questions.</p>
 
@@ -149,7 +149,7 @@
 
         <p id="messageBox" class="error-message"></p>
         <div id="paypalButton" style="display: none; margin-top: 20px;"></div>
-        <button class="btn" onclick="checkQualification()">Submit</button>
+        <button class="btn" id="submitButton" onclick="checkQualification()">Submit</button>
     </div>
 
     <script>
@@ -167,11 +167,8 @@
             var answer2 = document.getElementById("q2").value.trim().toLowerCase();
             var messageBox = document.getElementById("messageBox");
             var paypalButton = document.getElementById("paypalButton");
-            var submitButton = document.querySelector("button[onclick='checkQualification()']");
 
-            const isQualified = answer1 === "python" && (answer2.includes("data app") || answer2.includes("app"));
-
-            if (isQualified) {
+            if (answer1 === "python" && (answer2.includes("data app") || answer2.includes("app"))) {
                 messageBox.style.display = "none";
                 paypalButton.innerHTML = `<p><strong>Course Price: $29</strong></p>
                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -180,7 +177,6 @@
                         <input type="submit" class="btn" value="Purchase Course">
                     </form>`;
                 paypalButton.style.display = "block";
-                submitButton.style.display = "none";
             } else {
                 messageBox.style.display = "block";
                 messageBox.innerHTML = "❌ Incorrect answers. Please try again.";
@@ -191,7 +187,6 @@
             document.getElementById("overlay").style.display = "none";
             document.getElementById("popup").style.display = "none";
         }
-
     </script>
 </body>
 </html>
