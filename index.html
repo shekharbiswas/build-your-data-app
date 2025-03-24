@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build Your 1st Data App in Python</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bitter:wght@700&family=Roboto:wght@300;400&display=swap');
+        
         body { 
-            font-family: Arial, sans-serif; 
+            font-family: 'Roboto', sans-serif; 
             text-align: center; 
             background-color: #f4f4f4;
             margin: 0;
@@ -14,8 +16,12 @@
         }
         .header-container {
             width: 100%;
-            height: 300px;
-            background: url('assets/images/header.png') no-repeat center center/cover;
+            max-width: 700px;
+            margin: auto;
+        }
+        .header-image {
+            width: 100%;
+            border-radius: 10px;
         }
         .container {
             background: white;
@@ -24,11 +30,13 @@
             margin: auto;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            margin-top: -50px;
-            position: relative;
+            margin-top: 20px;
         }
-        h1 { color: #2c3e50; font-size: 32px; }
-        p { font-size: 18px; color: #555; }
+        h1, h2, h3 { font-family: 'Bitter', serif; color: #2c3e50; }
+        p, input { font-family: 'Roboto', sans-serif; font-weight: 300; font-size: 18px; color: #555; }
+        .question-label { font-size: 20px; font-weight: 400; display: block; margin-bottom: 5px; }
+        ul { text-align: left; list-style: none; padding: 0; }
+        li { font-size: 18px; margin: 10px 0; }
         .btn {
             background-color: #3498db;
             color: white;
@@ -46,13 +54,30 @@
 </head>
 <body>
 
-    <!-- Full-width Header Image -->
-    <div class="header-container"></div>
+    <!-- Header Image -->
+    <div class="header-container">
+        <img src="assets/images/header.png" alt="Build Your 1st Data App" class="header-image">
+    </div>
 
     <div class="container">
         <h1>Build Your 1st Data App in Python</h1>
         <p>A 4-week hands-on course to help you build & launch your first data app!</p>
         
+        <h2>Who is this course for?</h2>
+        <ul>
+            <li>✅ Beginners who want to break into data science.</li>
+            <li>✅ Developers looking to build real-world projects.</li>
+            <li>✅ Anyone interested in learning how to create interactive data apps.</li>
+        </ul>
+
+        <h2>What You Will Achieve</h2>
+        <ul>
+            <li>📊 Learn Python for Data Science & App Development.</li>
+            <li>📈 Master data processing, visualization, and APIs.</li>
+            <li>🚀 Build a fully functional **interactive data app**.</li>
+            <li>🌍 Deploy your app online for the world to see.</li>
+        </ul>
+
         <!-- "Check If You Qualify" Popup Button -->
         <button class="btn" onclick="openPopup()">Check If You Qualify</button>
     </div>
@@ -62,11 +87,11 @@
         <h2>Check If You Qualify</h2>
         <p>Answer these 2 simple questions.</p>
 
-        <label>1️⃣ What programming language is used in this course?</label><br>
-        <input type="text" id="q1" placeholder="Enter your answer"><br><br>
+        <label class="question-label">1️⃣ What programming language is used in this course?</label>
+        <input type="text" id="q1" placeholder="Enter your answer" style="width: 90%; padding: 10px; font-family: 'Roboto', sans-serif;"><br><br>
 
-        <label>2️⃣ What will you build in this course?</label><br>
-        <input type="text" id="q2" placeholder="Enter your answer"><br><br>
+        <label class="question-label">2️⃣ What will you build in this course?</label>
+        <input type="text" id="q2" placeholder="Enter your answer" style="width: 90%; padding: 10px; font-family: 'Roboto', sans-serif;"><br><br>
 
         <button class="btn" onclick="checkQualification()">Submit</button>
     </div>
