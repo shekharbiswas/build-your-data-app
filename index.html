@@ -101,15 +101,15 @@
         
         <h2>Who is this course for?</h2>
         <ul>
-            <li>✅ Beginners who want to learn python in a fun way.</li>
+            <li>✅ Beginners who want to learn python in a <i>fun way</i>.</li>
             <li>✅ Beginners who want to break into data science.</li>
-            <li>✅ Developers looking to build real-world projects.</li>
+            <li>✅ Developers looking to build <i>real-world</i> projects.</li>
             <li>✅ Anyone interested in learning how to create interactive data apps.</li>
         </ul>
 
         <h2>What You Will Achieve</h2>
         <ul>
-            <li>📊 Learn Python for Data Science & App Development.</li>
+            <li>📊 Learn Python Basics and <i>build your 1st App</i>.</li>
             <li>📈 Master data processing, visualization, and APIs.</li>
             <li>🚀 Build a fully functional **interactive data app**.</li>
             <li>🌍 Deploy your app online for the world to see.</li>
@@ -156,8 +156,12 @@
 
             if (isQualified) {
                 messageBox.style.display = "none";
-                paypalButton.innerHTML = `<p><strong>Course Price: $39</strong></p>
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YOUR_PAYPAL_BUTTON_ID" class="btn">Purchase Course</a>`;
+                paypalButton.innerHTML = `<p><strong>Course Price: $29</strong></p>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="YOUR_ACTUAL_PAYPAL_BUTTON_ID">
+                        <input type="submit" class="btn" value="Purchase Course">
+                    </form>`;
                 paypalButton.style.display = "block";
                 submitButton.style.display = "none";
             } else {
@@ -165,6 +169,7 @@
                 messageBox.innerHTML = "❌ Incorrect answers. Please try again.";
             }
         }
+
     </script>
 </body>
 </html>
